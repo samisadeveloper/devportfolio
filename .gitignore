@@ -4,7 +4,10 @@
 /node_modules
 /.pnp
 .pnp.js
+<<<<<<< HEAD
 .yarn/install-state.gz
+=======
+>>>>>>> bbd4f848776da749338cbb317f4dff1728502799
 
 # testing
 /coverage
@@ -27,6 +30,10 @@ yarn-error.log*
 
 # local env files
 .env*.local
+<<<<<<< HEAD
+=======
+.env
+>>>>>>> bbd4f848776da749338cbb317f4dff1728502799
 
 # vercel
 .vercel
@@ -34,6 +41,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+<<<<<<< HEAD
 
 # OpenNext
 /.open-next
@@ -43,3 +51,5 @@ next-env.d.ts
 .dev.vars*
 !.dev.vars.example
 !.env.example
+=======
+>>>>>>> bbd4f848776da749338cbb317f4dff1728502799
