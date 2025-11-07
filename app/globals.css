@@ -82,21 +82,8 @@ header p {
   padding-left: 2rem;
 }
 
-/* handle different devices */
 header #typewriter {
   color: #4fffad;
   font-weight: bold;
-  font-size: 100px; /* default for desktop */
-}
-
-@media (max-width: 768px) {
-  header #typewriter {
-    font-size: 50px; /* smaller on tablets */
-  }
-}
-
-@media (max-width: 480px) {
-  header #typewriter {
-    font-size: 25px; /* small on mobile */
-  }
+  font-size: clamp(25px, 10vw, 100px);
 }
