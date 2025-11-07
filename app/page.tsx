@@ -4,11 +4,6 @@
 import Typewriter from 'typewriter-effect';
 import ReactMarkdown from 'react-markdown';
 
-/* TODO:
- - use an animation engine for the content inside of <main>
- - seperation of concerns on different pages (maybe)
-*/ 
-
 function MyHeader() {
   return (
     <header>
@@ -38,7 +33,7 @@ export default function Home() {
   Most of my experience comes from Java and Lua, but I've recently been learning JavaScript and various JavaScript frameworks.
 
   # Education
-  During Highschool, I participated in the Game Development and Cybersecurity courses offered by the [Davis Catalyst Center](https://catalyst.davis.k12.ut.us/).
+  During Highschool, I participated in the Game Development and Cybersecurity courses offered by the [Davis Catalyst Center](https://catalyst.davis.k12.ut.us/)
 
   I am currently enrolled in the Software Development course at [Davis Technical College](https://www.davistech.edu/)
   ` 
