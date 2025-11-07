@@ -97,6 +97,6 @@ header #typewriter {
 
 @media (max-width: 480px) {
   header #typewriter {
-    font-size: 35px; /* small on mobile */
+    font-size: 25px; /* small on mobile */
   }
 }
