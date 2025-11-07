@@ -29,11 +29,11 @@ export default function Home() {
   const content = 
   `
   # About me
-  My name is Sam, and I love backend development.
+  My name is **Sam**, and I love backend development.
   
   I have always been fascinated by programming and have written a lot of code over the years.
 
-  Most of my experience comes from Java and Lua, but I've recently been learning JavaScript and various JavaScript frameworks.
+  Most of my experience comes from **Java** and **Lua**, but I've recently been learning **JavaScript** and various **JavaScript** frameworks.
 
   # Education
   During Highschool, I participated in the Game Development and Cybersecurity courses offered by the [Davis Catalyst Center](https://catalyst.davis.k12.ut.us/)
