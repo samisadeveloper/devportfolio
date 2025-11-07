@@ -1,8 +1,11 @@
 'use client'
 
-// import { Component } from 'react';
 import Typewriter from 'typewriter-effect';
 import ReactMarkdown from 'react-markdown';
+
+/* TODO
+  - nothing
+*/ 
 
 function MyHeader() {
   return (

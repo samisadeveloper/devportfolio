@@ -21,10 +21,11 @@
 }
 
 body {
-  background: #0d1117;
   color: #ededed;
   font-family: Arial, Helvetica, sans-serif;
-}
+
+  /* force dark mode */
+  background: #0d1117;}
 
 main {
   width: 80%;
@@ -36,7 +37,11 @@ main {
 /* markdown stuff */
 
 .markdown-body {
-  font-size: 2rem;
+  font-size: 1.7rem;
+  color: #ededed;
+
+  /* force dark mode  */
+  background: #0d1117; 
 }
 
 .markdown-body p {
@@ -77,8 +82,21 @@ header p {
   padding-left: 2rem;
 }
 
+/* handle different devices */
 header #typewriter {
   color: #4fffad;
   font-weight: bold;
-  font-size: 100px;
-} 
+  font-size: 100px; /* default for desktop */
+}
+
+@media (max-width: 768px) {
+  header #typewriter {
+    font-size: 50px; /* smaller on tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  header #typewriter {
+    font-size: 35px; /* small on mobile */
+  }
+}
