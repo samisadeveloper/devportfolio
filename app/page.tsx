@@ -2,6 +2,9 @@
 
 import Typewriter from 'typewriter-effect';
 import ReactMarkdown from 'react-markdown';
+import Image from 'next/image';
+
+import { motion } from "motion/react"
 
 /* TODO
   - nothing
@@ -45,6 +48,49 @@ export default function Home() {
     <>
       <MyHeader />
       <main>
+        <motion.div className="socials"
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <motion.div
+            whileHover={{ scale: 1.2 }}
+          >
+            <a href="https://github.com/samisadeveloper">
+              <Image
+                src="/github-logo.svg"
+                alt="github"
+                width={150}
+                height={150}
+              />
+            </a>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ scale: 1.2 }}
+          >
+            <a href="https://www.youtube.com/@samisgaming42">
+              <Image
+                src="/youtube-icon.svg"
+                alt="youtube"
+                width={150}
+                height={150}
+              />
+            </a>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ scale: 1.2 }}
+          >
+            <a href="https://www.linkedin.com/in/samuel-keller-378878293/">
+              <Image
+                src="/linkedin-logo.svg"
+                alt="linkedin"
+                width={150}
+                height={150}
+              />
+            </a>
+          </motion.div>
+        </motion.div>
         <article className="markdown-body">
           <ReactMarkdown>{content}</ReactMarkdown>
         </article>

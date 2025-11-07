@@ -34,9 +34,20 @@ main {
   margin: 0 auto;
 }
 
+/* styling for social media */
+
+.socials {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 /* markdown stuff */
 
 .markdown-body {
+  padding-top: 120px;
   font-size: 1.7rem;
   color: #ededed;
 
