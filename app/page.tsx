@@ -1,9 +1,8 @@
 'use client'
 
-import { Component } from 'react';
+// import { Component } from 'react';
 import Typewriter from 'typewriter-effect';
-
-// this is the new file
+import ReactMarkdown from 'react-markdown';
 
 /* TODO:
  - use an animation engine for the content inside of <main>
@@ -29,29 +28,28 @@ function MyHeader() {
 }
 
 export default function Home() {
+  const content = 
+  `
+  # About me
+  My name is Sam, and I love backend development.
+  
+  I have always been fascinated by programming and have written a lot of code over the years.
+
+  Most of my experience comes from Java and Lua, but I've recently been learning JavaScript and various JavaScript frameworks.
+
+  # Education
+  During Highschool, I participated in the Game Development and Cybersecurity courses offered by the [Davis Catalyst Center](https://catalyst.davis.k12.ut.us/).
+
+  I am currently enrolled in the Software Development course at [Davis Technical College](https://www.davistech.edu/)
+  ` 
+
   return (
     <>
       <MyHeader />
       <main>
-        <h2 className="text-8xl font-bold">About me</h2>
-        <p className="text-6xl">
-        My name is Sam, I am a developer. <br /> I have been writing code for several years.
-        <br /> <br />
-        I am mostly familiar with Java and Lua but I have some experience in other languages as well.
-        </p>
-
-        <h3 className="text-8xl pt-35 font-bold">Experience</h3>
-        <p className="text-6xl">
-        I have experience with these languages
-        </p>
-        <ul className="pl-25 text-5xl">
-          <li>Java</li>
-          <li>Lua</li>
-          <li>Javascript</li>
-          <li>C#</li>
-        </ul>
-
-        <br /> <br />
+        <article className="markdown-body">
+          <ReactMarkdown>{content}</ReactMarkdown>
+        </article>
       </main>
     </>
   );
