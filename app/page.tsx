@@ -30,7 +30,7 @@ function MyHeader() {
 
 export default function Home() {
   return (
-    <div>
+    <>
       <MyHeader />
       <main>
         <h2 className="text-8xl font-bold">About me</h2>
@@ -53,6 +53,6 @@ export default function Home() {
 
         <br /> <br />
       </main>
-    </div>
+    </>
   );
 }
