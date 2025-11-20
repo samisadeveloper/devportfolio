@@ -28,40 +28,53 @@ function MyHeader() {
   )
 }
 
+// Hi, I’m Sam — a backend developer with a strong foundation in Java and Lua, and growing expertise in modern JavaScript frameworks. I enjoy building scalable systems, automating workflows, and deploying real-world applications. My journey started with game development and has expanded into full-stack projects, server management, and cloud hosting.
 export default function Home() {
   const content = 
-  `
+    `
   # About me
-  My name is **Sam**, and I love backend development.
+  Hi, I'm Sam - a backend developer with a strong foundation in Java and Lua, and growing expertise in modern JavaScript frameworks. 
   
-  I have always been fascinated by programming and have written a lot of code over the years.
+  I enjoy building scalable systems, and deploying real-world applications.
 
-  Most of my experience comes from **Java** and **Lua**, but I've recently been learning **JavaScript** and various **JavaScript** frameworks.
+  My journey started with game development and has expanded into full-stack projects, server management, and cloud deployment.
+
+  I also value incredibly fast workflows, which is why I use Vim and a tiling window manager for development. 
 
   # Education
-  During Highschool, I participated in the Game Development and Cybersecurity courses offered by the [Davis Catalyst Center](https://catalyst.davis.k12.ut.us/)
+  [**Davis Catalyst Center**](https://catalyst.davis.k12.ut.us/)   
+  Game Development and Cybersecurity Courses (High School)
+  
+  [**Davis Technical College**](https://www.davistech.edu/)  
+  Software Development Program (currently enrolled)
 
-  I am currently enrolled in the Software Development course at [Davis Technical College](https://www.davistech.edu/)
-  ` 
+  # DevOps
+  I have hands-on experience with several DevOps tools which support efficient development, deployment, and hosting workflows:
+  - **Docker** - Containerized backend services
+  - **Docker Compose** - Used in conjunction with Docker to host backend APIs 
+  - **Cloudflare Workers / Pages** - Deployment for static sites
+  - **Cloudflared** - Used for secure tunneling and reverse proxying to expose local services.
+  
+    ` 
 
   return (
     <>
-      <MyHeader />
-      <main>
-        <motion.div className="socials"
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <motion.div
-            whileHover={{ scale: 1.2 }}
-          >
-            <a href="https://github.com/samisadeveloper">
-              <Image
-                src="/github-logo.svg"
-                alt="github"
-                width={150}
-                height={150}
-              />
+    <MyHeader />
+    <main>
+    <motion.div className="socials"
+    initial={{ opacity: 0, y: 100 }}
+    animate={{ opacity: 1, y: 0 }}
+    >
+    <motion.div
+    whileHover={{ scale: 1.2 }}
+    >
+    <a href="https://github.com/samisadeveloper">
+    <Image
+    src="/github-logo.svg"
+    alt="github"
+    width={150}
+    height={150}
+    />
             </a>
           </motion.div>
 
@@ -91,6 +104,7 @@ export default function Home() {
             </a>
           </motion.div>
         </motion.div>
+
         <article className="markdown-body">
           <ReactMarkdown>{content}</ReactMarkdown>
         </article>
