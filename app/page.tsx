@@ -81,7 +81,7 @@ export default function Home() {
           <motion.div
             whileHover={{ scale: 1.2 }}
           >
-            <a href="https://www.youtube.com/@samisgaming42">
+            <a href="https://www.youtube.com/@thejavaman42">
               <Image
                 src="/youtube-icon.svg"
                 alt="youtube"
