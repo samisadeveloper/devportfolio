@@ -3,7 +3,6 @@
 import Typewriter from 'typewriter-effect';
 import ReactMarkdown from 'react-markdown';
 import Image from 'next/image';
-import remarkDirective from "remark-directive";
 
 import { motion } from "motion/react"
 
