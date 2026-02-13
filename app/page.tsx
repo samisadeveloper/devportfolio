@@ -3,12 +3,16 @@
 import Typewriter from 'typewriter-effect';
 import ReactMarkdown from 'react-markdown';
 import Image from 'next/image';
+import remarkDirective from "remark-directive";
 
 import { motion } from "motion/react"
 
-/* TODO
-  - nothing
-*/ 
+/*
+ * TODO
+ * my projects
+ * move minecraft plugin development to projects
+ * contact me
+*/
 
 function MyHeader() {
   return (
@@ -28,35 +32,7 @@ function MyHeader() {
   )
 }
 
-// Hi, I’m Sam — a backend developer with a strong foundation in Java and Lua, and growing expertise in modern JavaScript frameworks. I enjoy building scalable systems, automating workflows, and deploying real-world applications. My journey started with game development and has expanded into full-stack projects, server management, and cloud hosting.
 export default function Home() {
-  const content = 
-    `
-  # About me
-  Hi, I'm Sam - a backend developer with a strong foundation in Java and Lua, and growing expertise in modern JavaScript frameworks. 
-  
-  I enjoy building scalable systems, and deploying real-world applications.
-
-  My journey started with game development and has expanded into full-stack projects, server management, and cloud deployment.
-
-  I also value incredibly fast workflows, which is why I use Vim and a tiling window manager for development. 
-
-  # Education
-  [**Davis Catalyst Center**](https://catalyst.davis.k12.ut.us/)   
-  Game Development and Cybersecurity Courses (High School)
-  
-  [**Davis Technical College**](https://www.davistech.edu/)  
-  Software Development Program (currently enrolled)
-
-  # DevOps
-  I have hands-on experience with several DevOps tools which support efficient development, deployment, and hosting workflows:
-  - **Docker** - Containerized backend services
-  - **Docker Compose** - Used in conjunction with Docker to host backend APIs 
-  - **Cloudflare Workers / Pages** - Deployment for static sites
-  - **Cloudflared** - Used for secure tunneling and reverse proxying to expose local services.
-  
-    ` 
-
   return (
     <>
     <MyHeader />
@@ -105,9 +81,33 @@ export default function Home() {
           </motion.div>
         </motion.div>
 
-        <article className="markdown-body">
-          <ReactMarkdown>{content}</ReactMarkdown>
-        </article>
+        <div className="skills">
+          <article className="markdown-body">
+            <ReactMarkdown>
+          {`
+# Skills
+### Minecraft Plugin Development
+
+Over the past *5+* years I've developed a large collection of Minecraft plugins including a modular minigame manager and a framework for rapidly creating custom items and recipes.
+
+I also designed and built my own minigame, *Bear Wars,* from scratch. It’s inspired by the core mechanics of Hypixel’s Bed Wars, but developed with my own systems, features, and gameplay twists to make it unique to my framework and server environment.
+
+### Docker
+
+Over the past several months I've focused on improving efficency and portability of my projects by adopting *Docker* and *Docker Compose*.
+
+I use *Docker* to self-host servers, API endpoints, and various hobbyist projects, allowing me to manage deployments cleanly and consistently.
+
+### Cloudflare
+
+In recent months I've been leveraging *Cloudflare's* Domain registration, workers, and reverse tunnels.
+
+My knowledge regarding this platform is still limited but I am excited to keep learning how it can be used in both professional and hobbyist enviornments.
+`
+          }
+            </ReactMarkdown>
+          </article>
+        </div>
       </main>
     </>
   );
