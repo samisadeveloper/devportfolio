@@ -93,7 +93,7 @@ I also designed and built my own minigame, *Bear Wars,* from scratch. It’s ins
 
 ### Docker
 
-Over the past several months I've focused on improving efficency and portability of my projects by adopting *Docker* and *Docker Compose*.
+Over the past several months I've focused on improving efficiency and portability of my projects by adopting *Docker* and *Docker Compose*.
 
 I use *Docker* to self-host servers, API endpoints, and various hobbyist projects, allowing me to manage deployments cleanly and consistently.
 
