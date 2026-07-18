@@ -34,6 +34,11 @@ body {
 
   /* force dark mode */
   background-color: #0c1318;
+
+  background-image:
+    linear-gradient(to right, #80808012 1px, transparent 1px),
+    linear-gradient(to bottom, #80808012 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
 /* styling for social media */
