@@ -114,14 +114,16 @@ function Language({ lang }: { lang: LangKey }) {
   if (!(lang in languages)) {
     return <></>
   } else {
+    const langName = lang.charAt(0).toUpperCase() + lang.slice(1);
+
     return (
       <RadixTooltip
         content={
           <motion.div initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }} >
-            <strong style={{ fontSize: 25 }}>{lang}</strong>
+            <strong style={{ fontSize: 25 }}>{langName}</strong>
 
             {languages[lang].desc && <p style={{ fontSize: 20 }}>{languages[lang].desc}</p>}
-            {!languages[lang].desc && <p style={{ fontSize: 20 }}>This project was made with {lang}.</p>}
+            {!languages[lang].desc && <p style={{ fontSize: 20 }}>This project was made with {langName}.</p>}
           </motion.div>
         }
         placement="top"
@@ -215,7 +217,7 @@ function Projects() {
 
 export default function Home() {
   return (
-    <div className="grid" style={{ height: '100vh' }}>
+    <div>
       <div>
         <MyHeader />
 
