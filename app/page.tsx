@@ -1,13 +1,15 @@
 'use client'
 
 import Header from './components/Header';
-import { ReactNode, useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ProjectCard, { loadProjects, Project } from './components/Project';
-import Modal from './components/Modal';
+import ProjectModal from './components/ProjectModal';
 
 export default function Home() {
-        const [modalContent, setModalContent] = useState<ReactNode>(null);
+        const modal = useRef<HTMLDialogElement>(null);
+
         const [projects, setProjects] = useState<Project[]>([]);
+        const [currentProject, setCurrentProject] = useState<Project>();
 
         useEffect(() => {
                 async function load() {
@@ -24,11 +26,17 @@ export default function Home() {
                         
                         <Header />
 
-                        <Modal content={modalContent} />
+                        <ProjectModal dialogRef={modal} project={currentProject} />
 
-                        {projects.map((project, index) => (
-                                <ProjectCard key={index} project={project} setModal={setModalContent} />
-                        ))}
+                        <div style={{justifyItems: 'center'}}>
+                                {projects.map((project, index) => (
+                                        <ProjectCard key={index} project={project} onClick={() => {
+                                                modal.current?.showModal();
+
+                                                setCurrentProject(project);
+                                        }} />
+                                ))}
+                        </div>
                 </>
         );
 }
