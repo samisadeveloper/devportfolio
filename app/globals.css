@@ -83,11 +83,3 @@ body {
 .markdown-body p {
   animation: fadeUp 0.6s ease forwards;
 }
-
-header #typewriter {
-  color: #4fffad;
-  font-weight: normal;
-  font-size: clamp(25px, 10vw, 100px);
-
-  font-family: var(--font-geist-mono);
-}
