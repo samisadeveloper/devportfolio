@@ -1,6 +1,7 @@
-import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
+import { MouseEventHandler } from 'react';
 import RadixTooltip from 'react-radix-tooltip';
 import { getRepositoryFromUrl, getResourcePath, Repository } from '../util/github';
+import { motion } from 'motion/react';
 
 export type Project = {
         name: String
@@ -10,13 +11,6 @@ export type Project = {
 
 const cardColor = "#101a21";
 const cardColorDown = "#17232b";
-
-// TODO: add a proper modal for each project
-const modalContent = (
-        <div style={{borderWidth: 1, borderColor: 'red', width: 500, height: 500}}>
-                <h1>This is a project lol</h1>
-        </div>
-);
 
 export async function loadProjects() : Promise<Project[]> {
         const projects = await fetch("/projects.json").then(response => response.json()) as any;
@@ -41,9 +35,7 @@ export async function loadProjects() : Promise<Project[]> {
         return newProjects;
 }
 
-export default function ProjectCard({project, setModal}: {project: Project, setModal: Dispatch<SetStateAction<ReactNode>>}) {
-        const [hovered, setHovered] = useState(false);
-
+export default function ProjectCard({project, onClick}: {project: Project, onClick: MouseEventHandler<HTMLDivElement>}) {
         return (
                 <RadixTooltip
                 content={
@@ -51,15 +43,20 @@ export default function ProjectCard({project, setModal}: {project: Project, setM
                         <h1>Click to learn more</h1>
                         </div>
                 }
+                delayDuration={200}
                 placement='top'
                 arrow={true}
                 >
-                <div
+
+                <motion.div
+
+                whileHover={{ backgroundColor: cardColorDown }}
+
                 style={{
                         display: 'flex',
                         justifyContent: 'space-between',
                         boxShadow: '0 0 10px 5px rgba(0, 0, 0, 0.15)',
-                        backgroundColor: hovered ? cardColorDown : cardColor,
+                        backgroundColor: cardColor,
                         borderColor: "white",
                         borderRadius: 15,
                         margin: 25,
@@ -67,10 +64,7 @@ export default function ProjectCard({project, setModal}: {project: Project, setM
                         cursor: 'pointer',
                 }}
 
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
-
-                onClick={() => setModal(modalContent)}
+                onClick={onClick}
                 >
                         <div style={{ margin: 15, marginLeft: 20, justifyContent: 'space-evenly', alignContent: 'center', flexDirection: 'column' }}>
                                 <div style={{display: 'flex', alignItems: 'center', gap: 15,}}>
@@ -85,19 +79,25 @@ export default function ProjectCard({project, setModal}: {project: Project, setM
                         </div>
 
                         <div style={{marginRight: 20, marginTop: 20, width: 350, height: '80%'}}>
-                                <h1 style={{fontSize: 25, fontWeight: 250}}>Languages</h1>
+                                <h1 style={{fontSize: 25, fontWeight: 450}}>Languages</h1>
 
-                                <ul style={{display: 'flex', flexWrap: 'wrap', gap: 16}}>
+                                <div style={{overflow: 'hidden', borderRadius: 12, display: 'flex', marginTop: 5, flexWrap: 'nowrap', width: '80%', height: 12}}>
                                         {project.repository.languages.map((lang, index) => (
-                                                <div key={index} style={{alignItems: 'center', display: 'flex', gap: 10}}>
-                                                        <p style={{fontSize: 20, color: lang.color}}>•</p>
+                                                <div key={index} style={{backgroundColor: lang.color, height: 12, width: `${lang.percentage}%`}}></div>
+                                        ))}
+                                </div>
+
+                                <ul style={{display: 'flex', marginTop: 10, flexWrap: 'wrap', gap: 10}}>
+                                        {project.repository.languages.map((lang, index) => (
+                                                <div key={index} style={{height: 20, alignItems: 'center', display: 'flex', gap: 10}}>
+                                                        <p style={{fontSize: 35, color: lang.color}}>•</p>
                                                         <p style={{fontSize: 18}}>{lang.lang}</p>
                                                         <p style={{fontSize: 18, color: '#9198a1'}}>{lang.percentage.toFixed(1)}%</p>
                                                 </div>
                                         ))}
                                 </ul>
                         </div>
-                </div>
+                </motion.div>
                 </RadixTooltip>
         );
 }
