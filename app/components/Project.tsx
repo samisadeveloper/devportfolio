@@ -51,7 +51,7 @@ export default function ProjectCard({project, setModal}: {project: Project, setM
                         <h1>Click to learn more</h1>
                         </div>
                 }
-                placement='bottom'
+                placement='top'
                 arrow={true}
                 >
                 <div
@@ -82,6 +82,20 @@ export default function ProjectCard({project, setModal}: {project: Project, setM
                                 <br />
 
                                 <p style={{ fontSize: 18, width: 1200, }}>{project.repository.description}</p>
+                        </div>
+
+                        <div style={{marginRight: 20, marginTop: 20, width: 350, height: '80%'}}>
+                                <h1 style={{fontSize: 25, fontWeight: 250}}>Languages</h1>
+
+                                <ul style={{display: 'flex', flexWrap: 'wrap', gap: 16}}>
+                                        {project.repository.languages.map((lang, index) => (
+                                                <div key={index} style={{alignItems: 'center', display: 'flex', gap: 10}}>
+                                                        <p style={{fontSize: 20, color: lang.color}}>•</p>
+                                                        <p style={{fontSize: 18}}>{lang.lang}</p>
+                                                        <p style={{fontSize: 18, color: '#9198a1'}}>{lang.percentage.toFixed(1)}%</p>
+                                                </div>
+                                        ))}
+                                </ul>
                         </div>
                 </div>
                 </RadixTooltip>

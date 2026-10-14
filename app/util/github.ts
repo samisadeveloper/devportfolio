@@ -1,9 +1,11 @@
 const REPOS_BASE_URL = "https://api.github.com/repos";
 const USER_CONTENT_BASE_URL = "https://raw.githubusercontent.com";
+const COLORS_API_URL = "https://raw.githubusercontent.com/ozh/github-colors/master/colors.json"
 
 type Language = {
         lang: String,
         percentage: number
+        color: string | undefined,
 }
 
 // TODO: also include repository website
@@ -24,14 +26,20 @@ async function getLanguages(author: String, repo: String) {
 
         const sumLines = Object.values(json).reduce((sum: number, value: number) => sum + value, 0);
 
+        const responseColors = await fetch(COLORS_API_URL);
+        const colors = await responseColors.json() as any;
+
         for (const language of Object.entries(json)) {
                 const lang = language[0];
                 const lines = language[1];
                 const percentage = (lines/sumLines)*100;
 
+                const color = colors[lang]?.color || "#9198a1";
+
                 languages.push({
                         lang: lang,
-                        percentage: percentage
+                        percentage: percentage,
+                        color: color
                 });
         }
 
