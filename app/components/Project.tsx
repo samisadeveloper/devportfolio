@@ -1,15 +1,9 @@
 import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
 import RadixTooltip from 'react-radix-tooltip';
-
-export type Repository = {
-        url: String,
-        author: String,
-        repo: String,
-};
+import { getRepositoryFromUrl, getResourcePath, Repository } from '../util/github';
 
 export type Project = {
         name: String
-        description: String
         repository: Repository
         icon?: string | Blob | undefined
 };
@@ -24,30 +18,20 @@ const modalContent = (
 );
 
 export async function loadProjects() : Promise<Project[]> {
-        const response = await fetch("/projects.json");
-        const jsonArray = await response.json() as any;
+        const projects = await fetch("/projects.json").then(response => response.json()) as any;
 
         const newProjects = [];
 
-        for (const json of jsonArray) {
-                const repositoryUrl = json.repository;
+        for (const json of projects) {
+                const repository = await getRepositoryFromUrl(json.repository);
 
-                const author = repositoryUrl.split("github.com/")[1].split("/")[0];
-
-                const repository = {
-                        url: repositoryUrl,
-                        author: author,
-                        repo: repositoryUrl.split(author+"/")[1]
-                } as Repository;
-
-                // TODO: get the languages as well
-                // https://api.github.com/repos/samisadeveloper/Web-Virtual-Display/languages
+                const icon = await getResourcePath(repository, ".github/media/icon.svg");
 
                 const project = {
                         name: json.name,
                         description: json.description,
                         repository: repository,
-                        icon: ""
+                        icon: icon,
                 } as Project;
 
                 newProjects.push(project);
@@ -61,18 +45,16 @@ export default function ProjectCard({project, setModal}: {project: Project, setM
 
         useEffect(() => {
                 async function getLanguages() {
-                        
-
-                        const url = "https://api.github.com/repos/samisadeveloper/Web-Virtual-Display/languages";
-
-                        const response = await fetch(url);
-                        const json = await response.json();
-
-                        console.log(json);
+                        // const url = "https://api.github.com/repos/samisadeveloper/Web-Virtual-Display/languages";
+                        //
+                        // const response = await fetch(url);
+                        // const json = await response.json();
+                        //
+                        // console.log(json);
                 }
 
                 getLanguages();
-        })
+        }, [])
 
         return (
                 <RadixTooltip
@@ -111,7 +93,7 @@ export default function ProjectCard({project, setModal}: {project: Project, setM
 
                                 <br />
 
-                                <p style={{ fontSize: 18, width: 1200, }}>{project.description}</p>
+                                <p style={{ fontSize: 18, width: 1200, }}>{project.repository.description}</p>
                         </div>
                 </div>
                 </RadixTooltip>

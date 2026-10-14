@@ -1,8 +1,10 @@
 [
         {
                 "name": "Web Virtual Display",
-                "description": "Virtual Display Software without the need of drivers or additional software. Run the .NET application and connect any device with a browser to act as an additional display.",
-                "repository": "https://github.com/samisadeveloper/Web-Virtual-Display",
-                "icon": ".github/media/icon.svg"
+                "repository": "https://github.com/samisadeveloper/Web-Virtual-Display"
+        }, 
+        {
+                "name": "Universal Clipper",
+                "repository": "https://github.com/samisadeveloper/universal-clipper"
         }
 ]
