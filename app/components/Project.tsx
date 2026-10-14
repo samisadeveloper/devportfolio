@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
 import RadixTooltip from 'react-radix-tooltip';
 import { getRepositoryFromUrl, getResourcePath, Repository } from '../util/github';
 
@@ -11,6 +11,7 @@ export type Project = {
 const cardColor = "#101a21";
 const cardColorDown = "#17232b";
 
+// TODO: add a proper modal for each project
 const modalContent = (
         <div style={{borderWidth: 1, borderColor: 'red', width: 500, height: 500}}>
                 <h1>This is a project lol</h1>
@@ -42,19 +43,6 @@ export async function loadProjects() : Promise<Project[]> {
 
 export default function ProjectCard({project, setModal}: {project: Project, setModal: Dispatch<SetStateAction<ReactNode>>}) {
         const [hovered, setHovered] = useState(false);
-
-        useEffect(() => {
-                async function getLanguages() {
-                        // const url = "https://api.github.com/repos/samisadeveloper/Web-Virtual-Display/languages";
-                        //
-                        // const response = await fetch(url);
-                        // const json = await response.json();
-                        //
-                        // console.log(json);
-                }
-
-                getLanguages();
-        }, [])
 
         return (
                 <RadixTooltip

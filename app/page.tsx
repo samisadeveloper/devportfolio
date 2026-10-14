@@ -1,16 +1,8 @@
 'use client'
 
-// import ReactMarkdown from 'react-markdown';
-import Image from 'next/image';
-
-import { motion } from "motion/react"
-
-import { FaJava, FaNodeJs, FaReact } from "react-icons/fa";
-import { IoLibraryOutline } from "react-icons/io5";
-
 import Header from './components/Header';
 import { ReactNode, useEffect, useState } from 'react';
-import ProjectCard, { loadProjects, Project, Repository } from './components/Project';
+import ProjectCard, { loadProjects, Project } from './components/Project';
 import Modal from './components/Modal';
 
 export default function Home() {
