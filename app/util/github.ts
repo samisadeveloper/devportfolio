@@ -1,6 +1,26 @@
+import projectsData from "../projects.json"
+
 const REPOS_BASE_URL = "https://api.github.com/repos";
 const USER_CONTENT_BASE_URL = "https://raw.githubusercontent.com";
 const COLORS_API_URL = "https://raw.githubusercontent.com/ozh/github-colors/master/colors.json"
+
+const getFetchHeaders = () => {
+    const token = process.env.GITHUB_TOKEN || '';
+    return {
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "NextJS-Portfolio-App",
+        ...(token ? { "Authorization": `Bearer ${token}` } : {})
+    };
+};
+
+async function ghFetch(url: string) {
+    const response = await fetch(url, { headers: getFetchHeaders() });
+    if (!response.ok) {
+        const body = await response.text();
+        throw new Error(`${response.status} ${response.statusText} for ${url}: ${body.slice(0, 300)}`);
+    }
+    return response.json();
+}
 
 type Language = {
         lang: string,
@@ -26,8 +46,7 @@ export type Project = {
 async function getLanguages(author: String, repo: String) {
         const languages = [] as Language[];
 
-        const response = await fetch(`${REPOS_BASE_URL}/${author}/${repo}/languages`);
-        const json = (await response.json()) as Record<string, number>;
+        const json = await ghFetch(`${REPOS_BASE_URL}/${author}/${repo}/languages`) as Record<string, number>;
 
         const sumLines = Object.values(json).reduce((sum: number, value: number) => sum + value, 0);
 
@@ -52,20 +71,15 @@ async function getLanguages(author: String, repo: String) {
 }
 
 async function getLatestCommit(author: String, repo: String, branch = "main") {
-        const response = await fetch(`${REPOS_BASE_URL}/${author}/${repo}/git/ref/heads/${branch}`);
-        const json = await response.json() as any;
+        const json = await ghFetch(`${REPOS_BASE_URL}/${author}/${repo}/git/ref/heads/${branch}`) as any;
 
         return json.object.sha;
 }
 
 async function getRepositoryData(author: String, repo: String) {
-        const response = await fetch(`${REPOS_BASE_URL}/${author}/${repo}`, {
-                headers: {
-                        "Accept": "application/vnd.github+json",
-                }
-        });
+        const json = await ghFetch(`${REPOS_BASE_URL}/${author}/${repo}`);
 
-        return await response.json();
+        return json;
 }
 
 export async function getResourcePath(repository: Repository, path: String) {
@@ -80,10 +94,11 @@ async function getRepositoryFromUrl(url: String) {
         const author = url.split("github.com/")[1].split("/")[0];
         const repo = url.split(author+"/")[1];
 
-        const languages = await getLanguages(author, repo);
-        const commitHash = await getLatestCommit(author, repo, "main");
-
-        const repositoryInfo = await getRepositoryData(author, repo) as any;
+        const [languages, commitHash, repositoryInfo] = await Promise.all([
+                getLanguages(author, repo),
+                getLatestCommit(author, repo, "main"),
+                getRepositoryData(author, repo) as any
+        ]);
 
         return {
                 url: url,
@@ -96,23 +111,32 @@ async function getRepositoryFromUrl(url: String) {
 }
 
 export async function loadProjects() : Promise<Project[]> {
-        const projects = await fetch("/projects.json").then(response => response.json()) as any;
-
         const newProjects = [];
+        const errors: string[] = [];
 
-        for (const json of projects) {
-                const repository = await getRepositoryFromUrl(json.repository);
+        console.log("token present:", !!process.env.GITHUB_TOKEN, "length:", process.env.GITHUB_TOKEN?.length);
 
-                const icon = await getResourcePath(repository, ".github/media/icon.svg");
+        for (const json of projectsData) {
+                try {
+                        const repository = await getRepositoryFromUrl(json.repository);
 
-                const project = {
-                        name: json.name,
-                        description: json.description,
-                        repository: repository,
-                        icon: icon,
-                } as Project;
+                        const icon = await getResourcePath(repository, ".github/media/icon.svg");
 
-                newProjects.push(project);
+                        const project = {
+                                name: json.name,
+                                repository: repository,
+                                icon: icon,
+                        } as Project;
+
+                        newProjects.push(project);
+                } catch (error) {
+                        errors.push(`${json.name}: ${(error as Error).message}`);
+                        console.error(`Error compiling project ${json.name}:`, error);
+                }
+        }
+
+        if (newProjects.length === 0 && projectsData.length > 0) {
+                throw new Error("All projects failed:\n" + errors.join("\n"));
         }
 
         return newProjects;
