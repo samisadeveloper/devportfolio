@@ -1,39 +1,10 @@
 import { MouseEventHandler } from 'react';
 import RadixTooltip from 'react-radix-tooltip';
-import { getRepositoryFromUrl, getResourcePath, Repository } from '../util/github';
 import { motion } from 'motion/react';
-
-export type Project = {
-        name: String
-        repository: Repository
-        icon?: string | Blob | undefined
-};
+import { Project } from '../util/github';
 
 const cardColor = "#101a21";
 const cardColorDown = "#17232b";
-
-export async function loadProjects() : Promise<Project[]> {
-        const projects = await fetch("/projects.json").then(response => response.json()) as any;
-
-        const newProjects = [];
-
-        for (const json of projects) {
-                const repository = await getRepositoryFromUrl(json.repository);
-
-                const icon = await getResourcePath(repository, ".github/media/icon.svg");
-
-                const project = {
-                        name: json.name,
-                        description: json.description,
-                        repository: repository,
-                        icon: icon,
-                } as Project;
-
-                newProjects.push(project);
-        }
-
-        return newProjects;
-}
 
 export default function ProjectCard({project, onClick}: {project: Project, onClick: MouseEventHandler<HTMLDivElement>}) {
         return (

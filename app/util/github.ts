@@ -3,19 +3,24 @@ const USER_CONTENT_BASE_URL = "https://raw.githubusercontent.com";
 const COLORS_API_URL = "https://raw.githubusercontent.com/ozh/github-colors/master/colors.json"
 
 type Language = {
-        lang: String,
+        lang: string,
         percentage: number
         color: string | undefined,
 }
 
-// TODO: also include repository website
 export type Repository = {
-        url: String,
-        author: String,
-        repo: String,
-        description: String,
+        url: string,
+        author: string,
+        repo: string,
+        description: string,
         languages: Language[]
-        commitHash: String
+        commitHash: string
+};
+
+export type Project = {
+        name: string
+        repository: Repository
+        icon?: string | Blob | undefined
 };
 
 async function getLanguages(author: String, repo: String) {
@@ -71,7 +76,7 @@ export async function getResourcePath(repository: Repository, path: String) {
         return `${USER_CONTENT_BASE_URL}/${author}/${repo}/${hash}/${path}`;
 }
 
-export async function getRepositoryFromUrl(url: String) {
+async function getRepositoryFromUrl(url: String) {
         const author = url.split("github.com/")[1].split("/")[0];
         const repo = url.split(author+"/")[1];
 
@@ -88,4 +93,27 @@ export async function getRepositoryFromUrl(url: String) {
                 languages: languages,
                 commitHash: commitHash
         } as Repository;
+}
+
+export async function loadProjects() : Promise<Project[]> {
+        const projects = await fetch("/projects.json").then(response => response.json()) as any;
+
+        const newProjects = [];
+
+        for (const json of projects) {
+                const repository = await getRepositoryFromUrl(json.repository);
+
+                const icon = await getResourcePath(repository, ".github/media/icon.svg");
+
+                const project = {
+                        name: json.name,
+                        description: json.description,
+                        repository: repository,
+                        icon: icon,
+                } as Project;
+
+                newProjects.push(project);
+        }
+
+        return newProjects;
 }
