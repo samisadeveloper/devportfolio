@@ -41,45 +41,10 @@ body {
   background-size: 24px 24px;
 }
 
-/* styling for social media */
-
-.socials {
-  display: flex;
-  flex-direction: row;
-
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-/* markdown stuff */
-
 .markdown-body {
-  margin: 15px;
-  padding-top: 25px;
-  font-size: 1.7rem;
-
-  /* color: #ededed; */
-  background-color: #0c1015;
-
-  /* force dark mode  */
-  /* background-color: #0b0f14; */
-  background-color: #0c1015;
-  /* background-color: #0d1117; */
+        text-align: left !important
 }
 
 .markdown-body h1 {
-  color: #4a90e2 !important;
-  text-align: center;
-}
-
-.markdown-body h2 {
-  color: mediumpurple !important;
-}
-
-.markdown-body h3 {
-  color: #4caf50 !important;
-}
-
-.markdown-body p {
-  animation: fadeUp 0.6s ease forwards;
+        text-align: left !important
 }
