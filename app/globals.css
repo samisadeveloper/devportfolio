@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import 'github-markdown-css/github-markdown.css';
+@import "tailwindcss";
 
 :root {
   --background: #ffffff;
@@ -46,5 +46,6 @@ body {
 }
 
 .markdown-body h1 {
-        text-align: left !important
+        text-align: left !important;
+        color: '#4a90e2';
 }

@@ -63,10 +63,10 @@ export default function ProjectModal({project, dialogRef}: {project: Project | u
                 animate={{y: 0}}
                 transition={{duration: 1}}
 
-                style={{outline: 'none', justifySelf: 'center', scrollbarWidth: 'none'}}
+                style={{outline: 'none', backgroundColor: '#0d1117', justifySelf: 'center', scrollbarWidth: 'none'}}
                 ref={dialogRef}>
                         {readme &&
-                                <div>
+                                <div style={{margin: 15}}>
                                         <div style={{position: 'absolute', display: 'flex', flexDirection: 'row', gap: 15, right: 0, margin: 50}}>
                                                 <motion.div
                                                         style={{cursor: 'pointer'}}
@@ -83,7 +83,7 @@ export default function ProjectModal({project, dialogRef}: {project: Project | u
                                                 }
                                         </div>
 
-                                        <div className="markdown-body" style={{fontSize: 18, width: 1000}}>
+                                        <div className="markdown-body" style={{fontSize: 18, width: 1200}}>
                                                 <Markdown
                                                 rehypePlugins={[rehypeRaw]}
                                                 components={{
