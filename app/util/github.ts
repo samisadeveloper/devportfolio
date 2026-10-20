@@ -5,12 +5,12 @@ const USER_CONTENT_BASE_URL = "https://raw.githubusercontent.com";
 const COLORS_API_URL = "https://raw.githubusercontent.com/ozh/github-colors/master/colors.json"
 
 const getFetchHeaders = () => {
-    const token = process.env.GITHUB_TOKEN || '';
-    return {
-        "Accept": "application/vnd.github+json",
-        "User-Agent": "NextJS-Portfolio-App",
-        ...(token ? { "Authorization": `Bearer ${token}` } : {})
-    };
+        const token = process.env.GITHUB_TOKEN || '';
+        return {
+                "Accept": "application/vnd.github+json",
+                "User-Agent": "NextJS-Portfolio-App",
+                ...(token ? { "Authorization": `Bearer ${token}` } : {})
+        };
 };
 
 async function ghFetch(url: string) {
@@ -40,6 +40,7 @@ export type Repository = {
 export type Project = {
         name: string
         repository: Repository
+        website?: string
         icon?: string | Blob | undefined
 };
 
